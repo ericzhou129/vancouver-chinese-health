@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温哥华华人医疗互助 | Vancouver Chinese Healthcare Community</title>
+    <meta name="description" content="温哥华华人医疗互助社区，提供中文就医指南、MSP保险解读、找医生攻略。Vancouver Chinese healthcare navigation and mutual aid community.">
+    <meta name="keywords" content="温哥华华人医疗,Vancouver Chinese healthcare,MSP保险,中文医生,华人看病">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo .en {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: block;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #059669;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #047857;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1e3a8a;
+            border: 2px solid #1e3a8a;
+        }
+
+        .btn-secondary:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: #1e3a8a;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+        }
+
+        /* Articles Section */
+        .articles {
+            padding: 4rem 0;
+            background: #f8fafc;
+        }
+
+        .articles h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: #1e3a8a;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .read-more {
+            color: #059669;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2c5aa0 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .wechat-info {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem auto;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+        }
+
+        .wechat-info h3 {
+            margin-bottom: 1rem;
+        }
+
+        .wechat-id {
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3a8a;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Article Page Styles */
+        .article-page {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .article-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2c5aa0 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .article-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .article-body {
+            padding: 2rem;
+            line-height: 1.8;
+        }
+
+        .article-body h2 {
+            color: #1e3a8a;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .article-body h3 {
+            color: #2c5aa0;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.2rem;
+        }
+
+        .article-body ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .article-body li {
+            margin: 0.5rem 0;
+        }
+
+        .highlight-box {
+            background: #f0f9ff;
+            border-left: 4px solid #2c5aa0;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 2rem;
+            color: #2c5aa0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" onclick="showPage('home')">
+                    温哥华华人医疗互助
+                    <span class="en">Vancouver Chinese Healthcare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')">首页 Home</a></li>
+                        <li><a href="#" onclick="showPage('articles')">文章 Articles</a></li>
+                        <li><a href="#" onclick="showPage('about')">关于我们 About</a></li>
+                        <li><a href="#" onclick="showPage('contact')">联系我们 Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>温哥华华人医疗互助社区</h1>
+                <p class="subtitle">
+                    专为华人提供中文医疗导航服务 | Chinese Healthcare Navigation for Vancouver Community
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="showPage('contact')">🤝 加入微信群 Join WeChat Group</a>
+                    <a href="#" class="btn btn-secondary" onclick="showPage('articles')">📚 阅读文章 Read Articles</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2>我们能帮助您什么？<br><small style="font-size: 0.7em; color: #64748b;">How Can We Help You?</small></h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏥</div>
+                        <h3>医疗系统导航<br><small>Healthcare Navigation</small></h3>
+                        <p>帮助您了解BC省医疗系统，知道什么时候去哪里看病。<br><em>Navigate BC's healthcare system and know where to go for medical care.</em></p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>中文经验分享<br><small>Chinese Experience Sharing</small></h3>
+                        <p>与其他华人分享就医经验，获得实用建议和支持。<br><em>Share medical experiences with other Chinese residents and get practical advice.</em></p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3>MSP保险解读<br><small>MSP Insurance Guide</small></h3>
+                        <p>详细解释MSP医疗保险覆盖范围和申请流程。<br><em>Detailed explanation of MSP coverage and application process.</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Preview -->
+        <section class="articles">
+            <div class="container">
+                <h2>最新文章 <small style="font-size: 0.7em; color: #64748b;">Latest Articles</small></h2>
+                <div class="articles-grid">
+                    <article class="article-card">
+                        <div class="article-content">
+                            <h3>温哥华华人看病完全指南：从家庭医生到急诊，一篇文章搞懂BC医疗系统</h3>
+                            <p class="article-excerpt">Complete guide to Vancouver Chinese healthcare: Understanding BC's healthcare system from family doctors to emergency rooms...</p>
+                            <div class="article-meta">
+                                <span>📅 2025年1月</span>
+                                <a href="#" class="read-more" onclick="showArticle('article1')">阅读全文 Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="article-card">
+                        <div class="article-content">
+                            <h3>MSP医保详解：华人最关心的20个问题</h3>
+                            <p class="article-excerpt">MSP Insurance Explained: 20 questions Chinese residents care about most, covering application, coverage, and daily usage...</p>
+                            <div class="article-meta">
+                                <span>📅 2025年1月</span>
+                                <a href="#" class="read-more" onclick="showArticle('article2')">阅读全文 Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Articles Page -->
+    <div id="articles-page" class="hidden">
+        <section class="articles">
+            <div class="container">
+                <h2>所有文章 <small style="font-size: 0.7em; color: #64748b;">All Articles</small></h2>
+                <div class="articles-grid">
+                    <article class="article-card">
+                        <div class="article-content">
+                            <h3>温哥华华人看病完全指南：从家庭医生到急诊，一篇文章搞懂BC医疗系统</h3>
+                            <p class="article-excerpt">刚来温哥华时，我遇到一对80多岁的华人老夫妇在沃尔玛。老奶奶背痛得厉害，但他们不知道该去哪里看病...</p>
+                            <div class="article-meta">
+                                <span>📅 2025年1月</span>
+                                <a href="#" class="read-more" onclick="showArticle('article1')">阅读全文 Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="article-card">
+                        <div class="article-content">
+                            <h3>MSP医保详解：华人最关心的20个问题</h3>
+                            <p class="article-excerpt">很多华人朋友对MSP医疗保险一知半解，不知道什么能报销、什么需要自费。今天我整理了华人社区最常问的20个MSP问题...</p>
+                            <div class="article-meta">
+                                <span>📅 2025年1月</span>
+                                <a href="#" class="read-more" onclick="showArticle('article2')">阅读全文 Read More →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Article 1 Page -->
+    <div id="article1-page" class="hidden">
+        <a href="#" class="back-link" onclick="showPage('articles')">← 返回文章列表 Back to Articles</a>
+        <article class="article-page">
+            <header class="article-header">
+                <h1>温哥华华人看病完全指南：从家庭医生到急诊，一篇文章搞懂BC医疗系统</h1>
+                <p><em>Complete Guide to Vancouver Chinese Healthcare: Understanding BC's Healthcare System</em></p>
+            </header>
+            <div class="article-body">
+                <h2>开篇</h2>
+                <p>刚来温哥华时，我遇到一对80多岁的华人老夫妇在沃尔玛。老奶奶背痛得厉害，但他们不知道该去哪里看病。Walk-in诊所关门了，他们不知道还有Urgent Care这个选择，更不知道怎么获得中文翻译服务。</p>
+                
+                <p>这样的情况在华人社区太常见了。今天这篇文章，我把BC省医疗系统的所有要点整理出来，希望帮助华人朋友们少走弯路。</p>
+
+                <h2>BC医疗系统概览</h2>
+                
+                <h3>🔹 MSP医疗保险计划</h3>
+                <p>MSP是BC省的基础医疗保险，涵盖：</p>
+                <ul>
+                    <li>家庭医生看诊</li>
+                    <li>专科医生转诊</li>
+                    <li>急诊和住院</li>
+                    <li>基础检查（验血、X光）</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <strong>不包括：</strong>牙科、配镜、处方药、理疗
+                </div>
+
+                <h3>🔹 医疗服务层级</h3>
+                <ol>
+                    <li><strong>家庭医生 [Family Doctor]</strong> - 首选，但很难找到</li>
+                    <li><strong>Walk-in诊所 [Walk-in Clinic]</strong> - 无预约，等待时间长</li>
+                    <li><strong>紧急护理 [Urgent Care]</strong> - 介于Walk-in和急诊之间</li>
+                    <li><strong>急诊室 [Emergency Room]</strong> - 只限生命危险情况</li>
+                </ol>
+
+                <h2>具体情况去哪里</h2>
+
+                <h3>🔹 家庭医生 [Family Doctor] - 适用情况</h3>
+                <p><strong>什么时候去：</strong>慢性病管理、体检、疫苗、转诊单</p>
+                <p><strong>如何预约：</strong>提前1-2周打电话，说"I would like to book an appointment"</p>
+                <p><strong>发音提示：</strong>"阿普oint门特"</p>
+
+                <h3>🔹 Walk-in诊所 [Walk-in Clinic] - 适用情况</h3>
+                <p><strong>什么时候去：</strong>感冒、发烧、轻微外伤、皮疹</p>
+                <p><strong>最佳时间：</strong>周一到周三上午，避开周末和下班后</p>
+                <p><strong>常用对话：</strong></p>
+                <ul>
+                    <li>"I need to see a doctor" (我需要看医生)</li>
+                    <li>"I have fever and cough" (我发烧咳嗽)</li>
+                </ul>
+
+                <h3>🔹 紧急护理 [Urgent Care] - 适用情况</h3>
+                <p><strong>什么时候去：</strong>严重腹痛、高烧不退、轻微外伤需要缝针</p>
+                <p><strong>温哥华Urgent Care地址：</strong></p>
+                <ul>
+                    <li>Richmond Urgent Care: Richmond Hospital</li>
+                    <li>VGH Urgent Care: 855 W 12th Ave</li>
+                    <li>Surrey Urgent Care: 13750 96 Ave</li>
+                </ul>
+
+                <h2>语言支持服务</h2>
+
+                <h3>🔹 免费翻译服务</h3>
+                <p><strong>医院翻译：</strong>所有BC省医院都提供免费中文翻译</p>
+                <p><strong>如何要求：</strong></p>
+                <ul>
+                    <li>英文："I need a Chinese interpreter"</li>
+                    <li>中文：告诉接待员你需要中文翻译</li>
+                </ul>
+
+                <p><strong>电话翻译：</strong>811 HealthLink BC</p>
+                <ul>
+                    <li>拨打811，说"Mandarin"或"Cantonese"</li>
+                    <li>24小时服务，免费</li>
+                </ul>
+
+                <h2>费用说明</h2>
+
+                <h3>🔹 MSP覆盖项目（免费）</h3>
+                <ul>
+                    <li>医生诊费</li>
+                    <li>急诊费用</li>
+                    <li>住院费用</li>
+                    <li>基础检查</li>
+                </ul>
+
+                <h3>🔹 自费项目</h3>
+                <ul>
+                    <li>体检信件：$50-100</li>
+                    <li>疫苗（旅行用）：$50-200</li>
+                    <li>医疗证明：$25-50</li>
+                    <li>处方药：根据保险而定</li>
+                </ul>
+
+                <h2>实用联系方式</h2>
+                <ul>
+                    <li><strong>紧急情况：</strong>911</li>
+                    <li><strong>健康咨询：</strong>811 (说"Mandarin"或"Cantonese")</li>
+                    <li><strong>MSP询问：</strong>1-800-663-7100</li>
+                    <li><strong>毒物控制：</strong>1-800-567-8911</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <p><strong>结语：</strong>在温哥华看病确实有挑战，但了解系统规则后就容易多了。最重要的是：不要因为语言障碍而延误就医，BC省有很多免费的语言支持服务。</p>
+                    <p>如果这篇文章对您有帮助，欢迎加入我们的【温哥华华人医疗互助群】，与其他华人朋友分享更多就医经验和技巧。</p>
+                </div>
+
+                <p><strong>免责声明：</strong>本文仅提供一般信息，不构成医疗建议。如有健康问题请咨询专业医生。</p>
+            </div>
+        </article>
+    </div>
+
+    <!-- Article 2 Page -->
+    <div id="article2-page" class="hidden">
+        <a href="#" class="back-link" onclick="showPage('articles')">← 返回文章列表 Back to Articles</a>
+        <article class="article-page">
+            <header class="article-header">
+                <h1>MSP医保详解：华人最关心的20个问题</h1>
+                <p><em>MSP Insurance Explained: 20 Questions Chinese Residents Care About Most</em></p>
+            </header>
+            <div class="article-body">
+                <h2>开篇</h2>
+                <p>很多华人朋友对MSP医疗保险一知半解，不知道什么能报销、什么需要自费。今天我整理了华人社区最常问的20个MSP问题，一次性帮大家搞清楚。</p>
+
+                <h2>基础申请问题</h2>
+                
+                <h3>🔹 问题1-5：申请相关</h3>
+                
+                <p><strong>Q1: 刚到BC省，什么时候能申请MSP？</strong><br>
+                <strong>A:</strong> 必须在BC省住满3个月才能申请。申请后还有2-3个月等待期。</p>
+
+                <p><strong>Q2: 等待期间生病怎么办？</strong><br>
+                <strong>A:</strong> 建议购买私人保险。看病费用：医生诊费$150-300，急诊$500-1000。</p>
+
+                <p><strong>Q3: 可以为家人申请吗？</strong><br>
+                <strong>A:</strong> 可以。配偶和19岁以下子女可以加入你的MSP计划。</p>
+
+                <p><strong>Q4: 申请需要什么文件？</strong><br>
+                <strong>A:</strong> 身份证明、住址证明、移民文件。具体清单见gov.bc.ca</p>
+
+                <p><strong>Q5: MSP卡丢了怎么办？</strong><br>
+                <strong>A:</strong> 在线申请补办或打电话1-800-663-7100。看病时报个人健康号码(PHN)即可。</p>
+
+                <h2>覆盖范围问题</h2>
+
+                <h3>🔹 问题6-15：什么能报销</h3>
+
+                <p><strong>Q6: 体检费用MSP报销吗？</strong><br>
+                <strong>A:</strong> 年度体检免费，但就业/移民体检需自费$150-300。</p>
+
+                <p><strong>Q7: 验血、X光检查免费吗？</strong><br>
+                <strong>A:</strong> 医生开单的检查完全免费，包括验血、X光、CT扫描。</p>
+
+                <p><strong>Q8: 专科医生费用怎么算？</strong><br>
+                <strong>A:</strong> 家庭医生转诊的专科完全免费。自己找专科医生可能要付费。</p>
+
+                <p><strong>Q9: 急诊费用多少？</strong><br>
+                <strong>A:</strong> 有MSP完全免费，包括救护车(如果医生认为必要)。</p>
+
+                <p><strong>Q10: 处方药报销吗？</strong><br>
+                <strong>A:</strong> MSP不包括处方药。需要Fair PharmaCare或私人保险。</p>
+
+                <div class="highlight-box">
+                    <p><strong>重要提醒：</strong>MSP不包括但重要的保险</p>
+                    <ul>
+                        <li><strong>Fair PharmaCare</strong> - 处方药保险</li>
+                        <li><strong>Extended Health Benefits</strong> - 牙科、配镜、理疗</li>
+                        <li><strong>Travel Insurance</strong> - 出行期间医疗保险</li>
+                    </ul>
+                </div>
+
+                <h2>实用资源</h2>
+                <ul>
+                    <li><strong>MSP客服：</strong>1-800-663-7100 (有中文服务)</li>
+                    <li><strong>在线服务：</strong>gov.bc.ca/health-insurance</li>
+                    <li><strong>Health Gateway：</strong>healthgateway.gov.bc.ca</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <p><strong>结语：</strong>MSP是BC省的基础医疗保障，涵盖大部分必需医疗服务。理解MSP规则可以帮助华人朋友更好地利用医疗资源，避免不必要的费用。</p>
+                    <p>如果还有其他MSP问题，欢迎加入我们的华人医疗互助群继续讨论。</p>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <!-- About Page -->
+    <div id="about-page" class="hidden">
+        <section class="features">
+            <div class="container">
+                <h2>关于我们 <small style="font-size: 0.7em; color: #64748b;">About Us</small></h2>
+                <div class="feature-card" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                    <h3>我们的故事 Our Story</h3>
+                    <p>两年前在沃尔玛，我遇到一对80多岁的华人老夫妇。老奶奶背痛得很厉害，但他们不知道该去哪里看病。这个经历让我意识到，我们华人社区需要一个可以互相帮助、分享就医经验的地方。</p>
+                    
+                    <p><em>Two years ago at Walmart, I met an elderly Chinese couple in their 80s. The grandmother was suffering from severe back pain, but they didn't know where to go for medical care. This experience made me realize that our Chinese community needs a place where we can help each other and share healthcare experiences.</em></p>
+
+                    <h3>我们的使命 Our Mission</h3>
+                    <p>为温哥华华人社区提供：</p>
+                    <ul>
+                        <li>🏥 中文医疗系统导航指导</li>
+                        <li>💬 华人就医经验分享平台</li>
+                        <li>🤝 社区互助和支持网络</li>
+                        <li>📚 实用的中文健康资讯</li>
+                    </ul>
+
+                    <p><em>Providing Vancouver's Chinese community with: Chinese healthcare navigation, experience sharing platform, mutual aid network, and practical health information in Chinese.</em></p>
+
+                    <h3>我们的原则 Our Principles</h3>
+                    <ul>
+                        <li><strong>非营利互助：</strong>以社区互助为核心，不以盈利为目的</li>
+                        <li><strong>信息分享：</strong>只分享经验，不提供医疗建议</li>
+                        <li><strong>文化尊重：</strong>理解和尊重中华文化和传统</li>
+                        <li><strong>语言友好：</strong>提供中文服务，消除语言障碍</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact-page" class="hidden">
+        <section class="contact">
+            <div class="container">
+                <h2>加入我们的社区</h2>
+                <p>Join Our Community</p>
+                
+                <div class="wechat-info">
+                    <h3>🤝 温哥华华人医疗互助群</h3>
+                    <p>Vancouver Chinese Healthcare Mutual Aid Group</p>
+                    
+                    <div class="wechat-id">
+                        微信号 WeChat ID: @AnxinHealthBC
+                    </div>
+                    
+                    <p>添加微信时请备注：医疗群<br>
+                    <em>When adding WeChat, please note: Medical Group</em></p>
+                    
+                    <div style="margin-top: 2rem;">
+                        <p><strong>群内提供 Group Provides:</strong></p>
+                        <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+                            <li>✅ 中文就医经验分享</li>
+                            <li>✅ MSP保险问题解答</li>
+                            <li>✅ 医生诊所推荐</li>
+                            <li>✅ 医疗系统导航帮助</li>
+                            <li>✅ 社区互助支持</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="background: rgba(255,255,255,0.1); border-left-color: white;">
+                    <p><strong>重要提醒 Important Notice:</strong></p>
+                    <p>本群仅提供信息分享和经验交流，不提供医疗建议。紧急情况请拨打911。</p>
+                    <p><em>This group only provides information sharing and experience exchange, not medical advice. For emergencies, call 911.</em></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>快速链接 Quick Links</h4>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')">首页 Home</a></li>
+                        <li><a href="#" onclick="showPage('articles')">文章 Articles</a></li>
+                        <li><a href="#" onclick="showPage('about')">关于我们 About</a></li>
+                        <li><a href="#" onclick="showPage('contact')">联系我们 Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>重要电话 Important Numbers</h4>
+                    <ul>
+                        <li>紧急情况 Emergency: 911</li>
+                        <li>健康咨询 Health: 811</li>
+                        <li>MSP询问: 1-800-663-7100</li>
+                        <li>毒物控制 Poison: 1-800-567-8911</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>免责声明 Disclaimer</h4>
+                    <p>本网站仅提供一般健康信息，不构成医疗建议。如有健康问题请咨询专业医生。</p>
+                    <p><em>This website provides general health information only and does not constitute medical advice.</em></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 温哥华华人医疗互助 | Vancouver Chinese Healthcare Community</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = ['home-page', 'articles-page', 'about-page', 'contact-page', 'article1-page', 'article2-page'];
+            pages.forEach(page => {
+                document.getElementById(page).classList.add('hidden');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId + '-page').classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showArticle(articleId) {
+            showPage(articleId);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
