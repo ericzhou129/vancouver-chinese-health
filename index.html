@@ -22,6 +22,14 @@
             line-height: 1.6;
             color: #333;
             background-color: #fafafa;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 18px;
+                line-height: 1.7;
+            }
         }
 
         .container {
@@ -60,6 +68,38 @@
             opacity: 0.9;
             display: block;
         }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .logo .en {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid white;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .menu-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .menu-toggle:active {
+            transform: scale(0.95);
+        }
 
         nav ul {
             display: flex;
@@ -73,10 +113,11 @@
             padding: 0.5rem 1rem;
             border-radius: 5px;
             transition: background 0.3s;
+            font-size: 1rem;
         }
 
         nav a:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.2);
         }
 
         /* Hero Section */
@@ -329,24 +370,123 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 0;
+            }
+            
+            .header-content {
+                gap: 0;
+            }
+            
             .hero h1 {
                 font-size: 2rem;
             }
             
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #1e3a8a;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
             }
             
             nav ul {
                 flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
+                gap: 0;
+                padding: 0;
+            }
+            
+            nav li {
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            nav li:last-child {
+                border-bottom: none;
+            }
+            
+            nav a {
+                display: block;
+                padding: 1.5rem 2rem;
+                font-size: 1.2rem;
+                font-weight: 500;
+                background: none;
+                border-radius: 0;
+                position: relative;
+            }
+            
+            /* Add arrow indicator for better visual cue */
+            nav a::after {
+                content: "›";
+                position: absolute;
+                right: 2rem;
+                font-size: 1.5rem;
+                opacity: 0.6;
+            }
+            
+            nav a {
+                display: block;
+                padding: 1.5rem 2rem;
+                font-size: 1.2rem;
+                font-weight: 500;
+                background: none;
+                border-radius: 0;
+                position: relative;
+            }
+            
+            nav a:hover, nav a:active {
+                background: rgba(255,255,255,0.1);
+            }
+            
+            /* Add visual feedback for touches */
+            nav a:active {
+                background: rgba(255,255,255,0.2);
+                transform: scale(0.98);
             }
 
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+            
+            .btn {
+                width: 90%;
+                max-width: 300px;
+                font-size: 1.2rem;
+                padding: 1.2rem 2rem;
+            }
+            
+            .article-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .read-more {
+                display: inline-block;
+                padding: 0.5rem 1rem;
+                background: #059669;
+                color: white;
+                border-radius: 6px;
+                margin-top: 0.5rem;
+                font-size: 1rem;
+            }
+            
+            .read-more:hover {
+                text-decoration: none;
+                background: #047857;
             }
         }
 
@@ -431,16 +571,17 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo" onclick="showPage('home')">
+                <a href="#home" class="logo">
                     温哥华华人医疗互助
                     <span class="en">Vancouver Chinese Healthcare</span>
                 </a>
-                <nav>
+                <button class="menu-toggle" onclick="toggleMenu()">☰ 菜单</button>
+                <nav id="main-nav">
                     <ul>
-                        <li><a href="#" onclick="showPage('home')">首页 Home</a></li>
-                        <li><a href="#" onclick="showPage('articles')">文章 Articles</a></li>
-                        <li><a href="#" onclick="showPage('about')">关于我们 About</a></li>
-                        <li><a href="#" onclick="showPage('contact')">联系我们 Contact</a></li>
+                        <li><a href="#home" onclick="closeMenu()">首页 Home</a></li>
+                        <li><a href="#articles" onclick="closeMenu()">文章 Articles</a></li>
+                        <li><a href="#about" onclick="closeMenu()">关于我们 About</a></li>
+                        <li><a href="#contact" onclick="closeMenu()">联系我们 Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -457,8 +598,8 @@
                     专为华人提供中文医疗导航服务 | Chinese Healthcare Navigation for Vancouver Community
                 </p>
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary" onclick="showPage('contact')">🤝 加入微信群 Join WeChat Group</a>
-                    <a href="#" class="btn btn-secondary" onclick="showPage('articles')">📚 阅读文章 Read Articles</a>
+                    <a href="#contact" class="btn btn-primary">🤝 加入微信群 Join WeChat Group</a>
+                    <a href="#articles" class="btn btn-secondary">📚 阅读文章 Read Articles</a>
                 </div>
             </div>
         </section>
@@ -498,7 +639,7 @@
                             <p class="article-excerpt">Complete guide to Vancouver Chinese healthcare: Understanding BC's healthcare system from family doctors to emergency rooms...</p>
                             <div class="article-meta">
                                 <span>📅 2025年1月</span>
-                                <a href="#" class="read-more" onclick="showArticle('article1')">阅读全文 Read More →</a>
+                                <a href="#healthcare-guide" class="read-more">阅读全文 Read More →</a>
                             </div>
                         </div>
                     </article>
@@ -508,7 +649,7 @@
                             <p class="article-excerpt">MSP Insurance Explained: 20 questions Chinese residents care about most, covering application, coverage, and daily usage...</p>
                             <div class="article-meta">
                                 <span>📅 2025年1月</span>
-                                <a href="#" class="read-more" onclick="showArticle('article2')">阅读全文 Read More →</a>
+                                <a href="#msp-insurance-guide" class="read-more">阅读全文 Read More →</a>
                             </div>
                         </div>
                     </article>
@@ -529,7 +670,7 @@
                             <p class="article-excerpt">刚来温哥华时，我遇到一对80多岁的华人老夫妇在沃尔玛。老奶奶背痛得厉害，但他们不知道该去哪里看病...</p>
                             <div class="article-meta">
                                 <span>📅 2025年1月</span>
-                                <a href="#" class="read-more" onclick="showArticle('article1')">阅读全文 Read More →</a>
+                                <a href="#healthcare-guide" class="read-more">阅读全文 Read More →</a>
                             </div>
                         </div>
                     </article>
@@ -539,7 +680,7 @@
                             <p class="article-excerpt">很多华人朋友对MSP医疗保险一知半解，不知道什么能报销、什么需要自费。今天我整理了华人社区最常问的20个MSP问题...</p>
                             <div class="article-meta">
                                 <span>📅 2025年1月</span>
-                                <a href="#" class="read-more" onclick="showArticle('article2')">阅读全文 Read More →</a>
+                                <a href="#msp-insurance-guide" class="read-more">阅读全文 Read More →</a>
                             </div>
                         </div>
                     </article>
@@ -548,9 +689,9 @@
         </section>
     </div>
 
-    <!-- Article 1 Page -->
-    <div id="article1-page" class="hidden">
-        <a href="#" class="back-link" onclick="showPage('articles')">← 返回文章列表 Back to Articles</a>
+    <!-- Healthcare Guide Article Page -->
+    <div id="healthcare-guide-page" class="hidden">
+        <a href="#articles" class="back-link">← 返回文章列表 Back to Articles</a>
         <article class="article-page">
             <header class="article-header">
                 <h1>温哥华华人看病完全指南：从家庭医生到急诊，一篇文章搞懂BC医疗系统</h1>
@@ -662,9 +803,9 @@
         </article>
     </div>
 
-    <!-- Article 2 Page -->
-    <div id="article2-page" class="hidden">
-        <a href="#" class="back-link" onclick="showPage('articles')">← 返回文章列表 Back to Articles</a>
+    <!-- MSP Insurance Guide Article Page -->
+    <div id="msp-insurance-guide-page" class="hidden">
+        <a href="#articles" class="back-link">← 返回文章列表 Back to Articles</a>
         <article class="article-page">
             <header class="article-header">
                 <h1>MSP医保详解：华人最关心的20个问题</h1>
@@ -816,10 +957,10 @@
                 <div class="footer-section">
                     <h4>快速链接 Quick Links</h4>
                     <ul>
-                        <li><a href="#" onclick="showPage('home')">首页 Home</a></li>
-                        <li><a href="#" onclick="showPage('articles')">文章 Articles</a></li>
-                        <li><a href="#" onclick="showPage('about')">关于我们 About</a></li>
-                        <li><a href="#" onclick="showPage('contact')">联系我们 Contact</a></li>
+                        <li><a href="#home">首页 Home</a></li>
+                        <li><a href="#articles">文章 Articles</a></li>
+                        <li><a href="#about">关于我们 About</a></li>
+                        <li><a href="#contact">联系我们 Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -844,27 +985,80 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const nav = document.getElementById('main-nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            nav.classList.toggle('active');
+            
+            // Change button text when menu is open
+            if (nav.classList.contains('active')) {
+                menuToggle.innerHTML = '✕ 关闭';
+            } else {
+                menuToggle.innerHTML = '☰ 菜单';
+            }
+        }
+        
+        function closeMenu() {
+            const nav = document.getElementById('main-nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            nav.classList.remove('active');
+            menuToggle.innerHTML = '☰ 菜单';
+        }
+
         function showPage(pageId) {
             // Hide all pages
-            const pages = ['home-page', 'articles-page', 'about-page', 'contact-page', 'article1-page', 'article2-page'];
+            const pages = ['home-page', 'articles-page', 'about-page', 'contact-page', 'healthcare-guide-page', 'msp-insurance-guide-page'];
             pages.forEach(page => {
-                document.getElementById(page).classList.add('hidden');
+                const element = document.getElementById(page);
+                if (element) {
+                    element.classList.add('hidden');
+                }
             });
             
             // Show selected page
-            document.getElementById(pageId + '-page').classList.remove('hidden');
+            const selectedPage = document.getElementById(pageId + '-page');
+            if (selectedPage) {
+                selectedPage.classList.remove('hidden');
+            }
+            
+            // Update URL hash
+            window.location.hash = pageId;
             
             // Scroll to top
             window.scrollTo(0, 0);
+            
+            // Close mobile menu if open
+            closeMenu();
         }
 
         function showArticle(articleId) {
             showPage(articleId);
         }
 
+        // Handle hash changes (when someone clicks back/forward or loads a URL with hash)
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1); // Remove the # symbol
+            if (hash) {
+                // Check if it's a valid page
+                const validPages = ['home', 'articles', 'about', 'contact', 'healthcare-guide', 'msp-insurance-guide'];
+                if (validPages.includes(hash)) {
+                    showPage(hash);
+                } else {
+                    showPage('home');
+                }
+            } else {
+                showPage('home');
+            }
+        }
+
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            showPage('home');
+            // Check if there's a hash in the URL
+            handleHashChange();
+            
+            // Listen for hash changes
+            window.addEventListener('hashchange', handleHashChange);
         });
     </script>
 </body>
