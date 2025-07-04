@@ -36,17 +36,43 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://anxinhealth.vercel.app/msp-insurance-guide">
     
-    <!-- Redirect to main page with hash -->
-    <meta http-equiv="refresh" content="0; url=/#msp-insurance-guide">
+    <!-- Delay redirect for social media crawlers -->
     <script>
-        // Immediate redirect with hash
-        window.location.replace('/#msp-insurance-guide');
+        // Check if this is a social media crawler
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isCrawler = /facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegram|slackbot|discordbot/.test(userAgent);
+        
+        if (!isCrawler) {
+            // Regular users get immediate redirect
+            window.location.replace('/#msp-insurance-guide');
+        } else {
+            // Crawlers stay on this page to read meta tags
+            console.log('Social media crawler detected, keeping on page for meta tags');
+        }
     </script>
+    <noscript>
+        <!-- Fallback for users without JavaScript -->
+        <meta http-equiv="refresh" content="2; url=/#msp-insurance-guide">
+    </noscript>
 </head>
-<body>
-    <h1>MSP医保详解：华人最关心的20个问题</h1>
-    <p>很多华人朋友对MSP医疗保险一知半解，不知道什么能报销、什么需要自费。这篇文章整理了华人社区最常问的20个MSP问题，一次性帮大家搞清楚。</p>
-    <p>正在跳转到文章页面...</p>
-    <p>如果没有自动跳转，请<a href="/#msp-insurance-guide">点击这里</a></p>
+<body style="font-family: 'Noto Sans SC', system-ui, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+    <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <h1 style="color: #1e3a8a; margin-bottom: 15px;">MSP医保详解：华人最关心的20个问题</h1>
+        <p style="color: #475569; font-size: 18px;">很多华人朋友对MSP医疗保险一知半解，不知道什么能报销、什么需要自费。这篇文章整理了华人社区最常问的20个MSP问题，一次性帮大家搞清楚。</p>
+    </div>
+    
+    <div style="background: #059669; color: white; padding: 15px 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+        <p style="margin: 0; font-size: 16px;">正在为您加载完整文章内容...</p>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="/#msp-insurance-guide" style="display: inline-block; background: #1e3a8a; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-size: 18px;">立即阅读完整文章 →</a>
+    </div>
+    
+    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb;">
+        <h2 style="color: #1e3a8a; margin-bottom: 15px;">关于温哥华华人医疗互助</h2>
+        <p style="color: #6b7280;">温哥华华人医疗互助社区致力于帮助本地华人更好地了解和使用BC省医疗系统。我们提供详细的中文医疗指南、MSP保险解读、就医经验分享等内容。</p>
+        <p style="color: #6b7280; margin-top: 10px;">访问我们的网站了解更多：<a href="https://anxinhealth.vercel.app" style="color: #059669;">anxinhealth.vercel.app</a></p>
+    </div>
 </body>
 </html>
