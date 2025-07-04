@@ -1,23 +1,12 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/healthcare-guide",
-      "destination": "/healthcare-guide.html"
+      "src": "/healthcare-guide",
+      "dest": "/healthcare-guide.html"
     },
     {
-      "source": "/msp-insurance-guide",
-      "destination": "/msp-insurance-guide.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=86400"
-        }
-      ]
+      "src": "/msp-insurance-guide", 
+      "dest": "/msp-insurance-guide.html"
     }
   ]
 }
