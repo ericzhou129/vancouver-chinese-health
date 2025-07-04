@@ -1,0 +1,43 @@
+{
+  "articles": {
+    "healthcare-guide": {
+      "id": "healthcare-guide",
+      "title": "温哥华华人看病完全指南：从家庭医生到急诊，一篇文章搞懂BC医疗系统",
+      "titleEn": "Complete Guide to Vancouver Chinese Healthcare",
+      "description": "刚来温哥华时，我遇到一对80多岁的华人老夫妇在沃尔玛。老奶奶背痛得厉害，但他们不知道该去哪里看病。这篇文章整理了BC省医疗系统的所有要点，帮助华人朋友们少走弯路。",
+      "descriptionEn": "Complete guide to Vancouver Chinese healthcare: Understanding BC's healthcare system from family doctors to emergency rooms. Learn about MSP, walk-in clinics, urgent care, and how to navigate healthcare in Chinese.",
+      "author": "温哥华安心医疗",
+      "publishDate": "2025-01-01",
+      "lastUpdated": "2025-01-03",
+      "category": "医疗导航",
+      "tags": ["家庭医生", "急诊", "Walk-in诊所", "Urgent Care", "MSP", "中文翻译", "BC医疗系统"],
+      "imageUrl": "/assets/images/healthcare-guide-og.jpg",
+      "featured": true,
+      "readTime": "10分钟"
+    },
+    "msp-insurance-guide": {
+      "id": "msp-insurance-guide",
+      "title": "MSP医保详解：华人最关心的20个问题",
+      "titleEn": "MSP Insurance Explained: 20 Questions Chinese Care About",
+      "description": "很多华人朋友对MSP医疗保险一知半解，不知道什么能报销、什么需要自费。这篇文章整理了华人社区最常问的20个MSP问题，一次性帮大家搞清楚。",
+      "descriptionEn": "MSP Insurance Explained: 20 questions Chinese residents care about most, covering application process, coverage details, and what's included or excluded from BC's health insurance.",
+      "author": "温哥华安心医疗",
+      "publishDate": "2025-01-02",
+      "lastUpdated": "2025-01-03",
+      "category": "保险指南",
+      "tags": ["MSP", "医疗保险", "报销", "申请流程", "BC医保", "Fair PharmaCare"],
+      "imageUrl": "/assets/images/msp-guide-og.jpg",
+      "featured": true,
+      "readTime": "8分钟"
+    }
+  },
+  "siteInfo": {
+    "siteName": "温哥华华人医疗互助",
+    "siteNameEn": "Vancouver Chinese Healthcare Community",
+    "siteDescription": "温哥华华人医疗互助社区，提供中文就医指南、MSP保险解读、找医生攻略。帮助华人朋友更好地使用BC省医疗系统。",
+    "siteDescriptionEn": "Vancouver Chinese healthcare navigation and mutual aid community. Providing healthcare guides, MSP insurance explanations, and doctor-finding strategies in Chinese.",
+    "siteUrl": "https://anxinhealth.vercel.app",
+    "defaultImage": "/assets/images/site-og-default.jpg",
+    "wechatQRCode": "/wechat-qr-code.jpg"
+  }
+}

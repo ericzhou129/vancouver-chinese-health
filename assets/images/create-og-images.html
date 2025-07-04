@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Create OG Images</title>
+    <style>
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            margin: 20px;
+        }
+        .canvas-container {
+            margin: 20px 0;
+            border: 1px solid #ccc;
+        }
+        canvas {
+            display: block;
+        }
+        button {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate Open Graph Images</h1>
+    <p>Click the buttons below to generate and download the OG images for each article.</p>
+    
+    <div class="canvas-container">
+        <canvas id="canvas" width="1200" height="630"></canvas>
+    </div>
+    
+    <button onclick="generateHealthcareGuideImage()">生成医疗指南图片</button>
+    <button onclick="generateMSPGuideImage()">生成MSP指南图片</button>
+    <button onclick="generateDefaultImage()">生成默认网站图片</button>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function drawBackground(gradient) {
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1200, 630);
+        }
+        
+        function drawText(lines, yStart, fontSize, color, maxWidth) {
+            ctx.fillStyle = color;
+            ctx.font = `${fontSize}px 'Noto Sans SC', sans-serif`;
+            ctx.textAlign = 'center';
+            
+            lines.forEach((line, index) => {
+                ctx.fillText(line, 600, yStart + (index * (fontSize + 10)), maxWidth);
+            });
+        }
+        
+        function drawLogo() {
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 24px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('温哥华华人医疗互助', 50, 50);
+            ctx.font = '18px sans-serif';
+            ctx.fillText('Vancouver Chinese Healthcare', 50, 80);
+        }
+        
+        function downloadImage(filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function generateHealthcareGuideImage() {
+            // Clear canvas
+            ctx.clearRect(0, 0, 1200, 630);
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+            gradient.addColorStop(0, '#2c5aa0');
+            gradient.addColorStop(1, '#1e3a8a');
+            drawBackground(gradient);
+            
+            // Logo
+            drawLogo();
+            
+            // Main title
+            drawText(
+                ['温哥华华人看病完全指南', '从家庭医生到急诊'],
+                250,
+                48,
+                '#ffffff',
+                1000
+            );
+            
+            // Subtitle
+            drawText(
+                ['一篇文章搞懂BC医疗系统'],
+                380,
+                32,
+                '#e0f2fe',
+                800
+            );
+            
+            // Icons
+            ctx.font = '64px sans-serif';
+            ctx.textAlign = 'center';
+            const icons = ['🏥', '👨‍⚕️', '🚑', '💊'];
+            icons.forEach((icon, index) => {
+                ctx.fillText(icon, 300 + (index * 200), 480);
+            });
+            
+            // Bottom text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '20px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('anxinhealth.vercel.app', 600, 580);
+            
+            downloadImage('healthcare-guide-og.jpg');
+        }
+        
+        function generateMSPGuideImage() {
+            // Clear canvas
+            ctx.clearRect(0, 0, 1200, 630);
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+            gradient.addColorStop(0, '#059669');
+            gradient.addColorStop(1, '#047857');
+            drawBackground(gradient);
+            
+            // Logo
+            drawLogo();
+            
+            // Main title
+            drawText(
+                ['MSP医保详解'],
+                250,
+                56,
+                '#ffffff',
+                1000
+            );
+            
+            // Subtitle
+            drawText(
+                ['华人最关心的20个问题'],
+                340,
+                40,
+                '#d1fae5',
+                800
+            );
+            
+            // Question marks pattern
+            ctx.font = '36px sans-serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 3; j++) {
+                    ctx.fillText('?', 200 + (i * 200), 420 + (j * 60));
+                }
+            }
+            
+            // Key points
+            ctx.font = '24px sans-serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'left';
+            const points = ['✓ 申请流程', '✓ 报销范围', '✓ 自费项目'];
+            points.forEach((point, index) => {
+                ctx.fillText(point, 450, 450 + (index * 40));
+            });
+            
+            // Bottom text
+            ctx.font = '20px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('anxinhealth.vercel.app', 600, 580);
+            
+            downloadImage('msp-guide-og.jpg');
+        }
+        
+        function generateDefaultImage() {
+            // Clear canvas
+            ctx.clearRect(0, 0, 1200, 630);
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+            gradient.addColorStop(0, '#f0f9ff');
+            gradient.addColorStop(1, '#e0f2fe');
+            drawBackground(gradient);
+            
+            // Main title
+            ctx.fillStyle = '#1e3a8a';
+            ctx.font = 'bold 64px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('温哥华华人医疗互助', 600, 250);
+            
+            // English title
+            ctx.font = '36px sans-serif';
+            ctx.fillText('Vancouver Chinese Healthcare Community', 600, 320);
+            
+            // Tagline
+            ctx.fillStyle = '#64748b';
+            ctx.font = '28px sans-serif';
+            ctx.fillText('专为华人提供中文医疗导航服务', 600, 400);
+            
+            // Icons
+            ctx.font = '48px sans-serif';
+            const icons = ['🏥', '💬', '🤝', '📚'];
+            icons.forEach((icon, index) => {
+                ctx.fillText(icon, 300 + (index * 200), 480);
+            });
+            
+            // Website
+            ctx.fillStyle = '#2c5aa0';
+            ctx.font = '24px sans-serif';
+            ctx.fillText('anxinhealth.vercel.app', 600, 560);
+            
+            downloadImage('site-og-default.jpg');
+        }
+        
+        // Generate all images on load
+        window.onload = function() {
+            generateDefaultImage();
+        };
+    </script>
+</body>
+</html>

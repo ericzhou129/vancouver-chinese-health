@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 温哥华华人医疗互助</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        h2 {
+            color: #2c5aa0;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #374151;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        button {
+            background: #059669;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #047857;
+        }
+        
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .button-secondary {
+            background: #6b7280;
+            margin-left: 10px;
+        }
+        
+        .button-secondary:hover {
+            background: #4b5563;
+        }
+        
+        .article-list {
+            margin-top: 20px;
+        }
+        
+        .article-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .article-info h3 {
+            color: #1e3a8a;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .article-meta {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .article-actions button {
+            padding: 6px 15px;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+        
+        .qr-section {
+            text-align: center;
+        }
+        
+        .qr-preview {
+            margin: 20px 0;
+        }
+        
+        .qr-preview img {
+            max-width: 200px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+        }
+        
+        #file-input {
+            margin: 20px 0;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .alert-info {
+            background: #dbeafe;
+            color: #1e3a8a;
+            border: 1px solid #93c5fd;
+        }
+        
+        .code-output {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin-top: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #6b7280;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            color: #1e3a8a;
+            border-bottom: 2px solid #1e3a8a;
+            margin-bottom: -2px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .preview-container {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+            background: white;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 管理后台 - 温哥华华人医疗互助</h1>
+        
+        <div class="alert alert-info">
+            <strong>提示：</strong>此页面用于管理网站内容。修改后需要手动更新相关文件到GitHub仓库。
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('articles')">📝 文章管理</button>
+            <button class="tab" onclick="showTab('qrcode')">📱 二维码管理</button>
+            <button class="tab" onclick="showTab('settings')">⚙️ 网站设置</button>
+        </div>
+        
+        <!-- Articles Tab -->
+        <div id="articles-tab" class="tab-content active">
+            <div class="section">
+                <h2>新增文章</h2>
+                <form id="article-form">
+                    <div class="form-group">
+                        <label for="article-id">文章ID (用于URL，只能包含字母、数字和横线)</label>
+                        <input type="text" id="article-id" placeholder="例如：healthcare-guide" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="article-title">文章标题（中文）</label>
+                        <input type="text" id="article-title" placeholder="例如：温哥华华人看病完全指南" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="article-title-en">文章标题（英文）</label>
+                        <input type="text" id="article-title-en" placeholder="例如：Complete Guide to Vancouver Chinese Healthcare">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="article-description">文章描述（中文，用于社交媒体分享预览）</label>
+                        <textarea id="article-description" placeholder="简短描述文章内容，建议50-150字" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="article-content">文章内容（HTML格式）</label>
+                        <textarea id="article-content" style="min-height: 300px;" placeholder="将文章HTML内容粘贴在这里..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="article-category">分类</label>
+                        <select id="article-category">
+                            <option value="医疗导航">医疗导航</option>
+                            <option value="保险指南">保险指南</option>
+                            <option value="社区经验">社区经验</option>
+                            <option value="健康资讯">健康资讯</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="article-tags">标签（用逗号分隔）</label>
+                        <input type="text" id="article-tags" placeholder="例如：家庭医生,急诊,MSP">
+                    </div>
+                    
+                    <button type="submit">生成文章页面</button>
+                    <button type="button" class="button-secondary" onclick="previewArticle()">预览文章</button>
+                </form>
+                
+                <div id="article-output" class="code-output hidden"></div>
+                <div id="article-preview" class="preview-container hidden"></div>
+            </div>
+            
+            <div class="section">
+                <h2>现有文章</h2>
+                <div class="article-list">
+                    <div class="article-item">
+                        <div class="article-info">
+                            <h3>温哥华华人看病完全指南</h3>
+                            <div class="article-meta">
+                                ID: healthcare-guide | 分类：医疗导航 | 发布：2025-01-01
+                            </div>
+                        </div>
+                        <div class="article-actions">
+                            <button onclick="editArticle('healthcare-guide')">编辑</button>
+                            <button onclick="viewArticle('healthcare-guide')">查看</button>
+                        </div>
+                    </div>
+                    <div class="article-item">
+                        <div class="article-info">
+                            <h3>MSP医保详解：华人最关心的20个问题</h3>
+                            <div class="article-meta">
+                                ID: msp-insurance-guide | 分类：保险指南 | 发布：2025-01-02
+                            </div>
+                        </div>
+                        <div class="article-actions">
+                            <button onclick="editArticle('msp-insurance-guide')">编辑</button>
+                            <button onclick="viewArticle('msp-insurance-guide')">查看</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- QR Code Tab -->
+        <div id="qrcode-tab" class="tab-content">
+            <div class="section qr-section">
+                <h2>更新微信群二维码</h2>
+                <div class="qr-preview">
+                    <img id="current-qr" src="wechat-qr-code.jpg" alt="当前二维码">
+                    <p>当前二维码</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="qr-upload">上传新的二维码图片</label>
+                    <input type="file" id="qr-upload" accept="image/*">
+                </div>
+                
+                <div id="new-qr-preview" class="qr-preview hidden">
+                    <img id="new-qr" alt="新二维码预览">
+                    <p>新二维码预览</p>
+                </div>
+                
+                <button onclick="updateQRCode()" disabled id="update-qr-btn">更新二维码</button>
+                
+                <div class="alert alert-info" style="margin-top: 20px;">
+                    <strong>操作说明：</strong>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>上传新的二维码图片</li>
+                        <li>预览确认无误后点击"更新二维码"</li>
+                        <li>将生成的文件命名为 wechat-qr-code.jpg</li>
+                        <li>上传到GitHub仓库根目录替换原文件</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Tab -->
+        <div id="settings-tab" class="tab-content">
+            <div class="section">
+                <h2>网站基本信息</h2>
+                <form id="settings-form">
+                    <div class="form-group">
+                        <label for="site-name">网站名称（中文）</label>
+                        <input type="text" id="site-name" value="温哥华华人医疗互助">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="site-name-en">网站名称（英文）</label>
+                        <input type="text" id="site-name-en" value="Vancouver Chinese Healthcare Community">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="site-description">网站描述</label>
+                        <textarea id="site-description">温哥华华人医疗互助社区，提供中文就医指南、MSP保险解读、找医生攻略。</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="site-url">网站URL</label>
+                        <input type="url" id="site-url" value="https://anxinhealth.vercel.app">
+                    </div>
+                    
+                    <button type="submit">更新设置</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Article form submission
+        document.getElementById('article-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateArticlePage();
+        });
+        
+        function generateArticlePage() {
+            const id = document.getElementById('article-id').value;
+            const title = document.getElementById('article-title').value;
+            const titleEn = document.getElementById('article-title-en').value;
+            const description = document.getElementById('article-description').value;
+            const content = document.getElementById('article-content').value;
+            const category = document.getElementById('article-category').value;
+            const tags = document.getElementById('article-tags').value;
+            
+            // Generate the HTML for the article page
+            const articleHTML = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <meta name="description" content="${description}">
+    <meta name="keywords" content="${tags}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://anxinhealth.vercel.app/${id}">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${description}">
+    <meta property="og:image" content="https://anxinhealth.vercel.app/assets/images/${id}-og.jpg">
+    <meta property="og:site_name" content="温哥华华人医疗互助">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="article:published_time" content="${new Date().toISOString()}">
+    <meta property="article:author" content="温哥华安心医疗">
+    <meta property="article:section" content="${category}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://anxinhealth.vercel.app/${id}">
+    <meta property="twitter:title" content="${title}">
+    <meta property="twitter:description" content="${description}">
+    <meta property="twitter:image" content="https://anxinhealth.vercel.app/assets/images/${id}-og.jpg">
+    
+    <!-- Redirect to main page with hash -->
+    <meta http-equiv="refresh" content="0; url=/#${id}">
+    <script>
+        window.location.replace('/#${id}');
+    </script>
+</head>
+<body>
+    <h1>${title}</h1>
+    <p>${description}</p>
+    <p>正在跳转到文章页面...</p>
+    <p>如果没有自动跳转，请<a href="/#${id}">点击这里</a></p>
+</body>
+</html>`;
+            
+            // Show the output
+            const output = document.getElementById('article-output');
+            output.textContent = articleHTML;
+            output.classList.remove('hidden');
+            
+            // Also generate the article data for articles.json
+            const articleData = {
+                id: id,
+                title: title,
+                titleEn: titleEn,
+                description: description,
+                category: category,
+                tags: tags.split(',').map(t => t.trim()),
+                publishDate: new Date().toISOString().split('T')[0]
+            };
+            
+            alert('文章页面已生成！请复制下方代码并保存为 ' + id + '.html 文件');
+        }
+        
+        function previewArticle() {
+            const title = document.getElementById('article-title').value;
+            const content = document.getElementById('article-content').value;
+            
+            const preview = document.getElementById('article-preview');
+            preview.innerHTML = `
+                <h2>${title}</h2>
+                <div style="margin-top: 20px;">
+                    ${content}
+                </div>
+            `;
+            preview.classList.remove('hidden');
+        }
+        
+        // QR Code upload handling
+        document.getElementById('qr-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('new-qr').src = e.target.result;
+                    document.getElementById('new-qr-preview').classList.remove('hidden');
+                    document.getElementById('update-qr-btn').disabled = false;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        function updateQRCode() {
+            alert('请将新的二维码图片保存为 wechat-qr-code.jpg 并上传到GitHub仓库');
+        }
+        
+        function editArticle(id) {
+            alert('编辑功能开发中...\n请直接在 index.html 中修改文章内容');
+        }
+        
+        function viewArticle(id) {
+            window.open('/#' + id, '_blank');
+        }
+        
+        // Settings form
+        document.getElementById('settings-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('设置已保存！请更新 data/articles.json 文件中的相应内容');
+        });
+    </script>
+</body>
+</html>

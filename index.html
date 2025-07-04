@@ -7,6 +7,23 @@
     <meta name="description" content="温哥华华人医疗互助社区，提供中文就医指南、MSP保险解读、找医生攻略。Vancouver Chinese healthcare navigation and mutual aid community.">
     <meta name="keywords" content="温哥华华人医疗,Vancouver Chinese healthcare,MSP保险,中文医生,华人看病">
     
+    <!-- Open Graph / Facebook (Default for homepage) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anxinhealth.vercel.app">
+    <meta property="og:title" content="温哥华华人医疗互助 | Vancouver Chinese Healthcare Community">
+    <meta property="og:description" content="温哥华华人医疗互助社区，提供中文就医指南、MSP保险解读、找医生攻略。帮助华人朋友更好地使用BC省医疗系统。">
+    <meta property="og:image" content="https://anxinhealth.vercel.app/assets/images/site-og-default.jpg">
+    <meta property="og:site_name" content="温哥华华人医疗互助">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://anxinhealth.vercel.app">
+    <meta property="twitter:title" content="温哥华华人医疗互助">
+    <meta property="twitter:description" content="温哥华华人医疗互助社区，提供中文就医指南、MSP保险解读、找医生攻略。">
+    <meta property="twitter:image" content="https://anxinhealth.vercel.app/assets/images/site-og-default.jpg">
+    
     <!-- 
     IMPORTANT: Upload the WeChat QR code image as "wechat-qr-code.jpg" in the same directory as this HTML file.
     The QR code should be the one for joining the 温哥华安心医疗互助群 WeChat group.
@@ -663,7 +680,7 @@
                             <p class="article-excerpt">Complete guide to Vancouver Chinese healthcare: Understanding BC's healthcare system from family doctors to emergency rooms...</p>
                             <div class="article-meta">
                                 <span>📅 2025年1月</span>
-                                <a href="#healthcare-guide" class="read-more">阅读全文 Read More →</a>
+                                <a href="#healthcare-guide" class="read-more" onclick="updateShareableLink(event, 'healthcare-guide')">阅读全文 Read More →</a>
                             </div>
                         </div>
                     </article>
@@ -673,7 +690,7 @@
                             <p class="article-excerpt">MSP Insurance Explained: 20 questions Chinese residents care about most, covering application, coverage, and daily usage...</p>
                             <div class="article-meta">
                                 <span>📅 2025年1月</span>
-                                <a href="#msp-insurance-guide" class="read-more">阅读全文 Read More →</a>
+                                <a href="#msp-insurance-guide" class="read-more" onclick="updateShareableLink(event, 'msp-insurance-guide')">阅读全文 Read More →</a>
                             </div>
                         </div>
                     </article>
@@ -694,7 +711,7 @@
                             <p class="article-excerpt">刚来温哥华时，我遇到一对80多岁的华人老夫妇在沃尔玛。老奶奶背痛得厉害，但他们不知道该去哪里看病...</p>
                             <div class="article-meta">
                                 <span>📅 2025年1月</span>
-                                <a href="#healthcare-guide" class="read-more">阅读全文 Read More →</a>
+                                <a href="#healthcare-guide" class="read-more" onclick="updateShareableLink(event, 'healthcare-guide')">阅读全文 Read More →</a>
                             </div>
                         </div>
                     </article>
@@ -704,7 +721,7 @@
                             <p class="article-excerpt">很多华人朋友对MSP医疗保险一知半解，不知道什么能报销、什么需要自费。今天我整理了华人社区最常问的20个MSP问题...</p>
                             <div class="article-meta">
                                 <span>📅 2025年1月</span>
-                                <a href="#msp-insurance-guide" class="read-more">阅读全文 Read More →</a>
+                                <a href="#msp-insurance-guide" class="read-more" onclick="updateShareableLink(event, 'msp-insurance-guide')">阅读全文 Read More →</a>
                             </div>
                         </div>
                     </article>
@@ -1051,6 +1068,18 @@
     </footer>
 
     <script>
+        // Update shareable link
+        function updateShareableLink(event, articleId) {
+            // Allow normal navigation
+            // But also update the URL to be shareable
+            const shareableUrl = window.location.origin + '/' + articleId;
+            
+            // Update browser history to show shareable URL
+            setTimeout(() => {
+                history.replaceState(null, '', shareableUrl);
+            }, 100);
+        }
+        
         // Mobile menu toggle
         function toggleMenu() {
             const nav = document.getElementById('main-nav');
